@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Admin, Resource } from "react-admin";
+import jsonServerProvider from "ra-data-json-server";
+import Dashboard from "./Dashboard";
+import { UserList, UserCreate, UserEdit } from "./Users";
+import { PostList, PostEdit, PostCreate } from "./Posts";
+import PostIcon from "@material-ui/icons/Book";
+import UserIcon from "@material-ui/icons/Group";
+// import simpleRestProvider from "ra-data-simple-rest";
 
-function App() {
+const dataProvider = jsonServerProvider(
+  "https://amit-json-server.herokuapp.com"
+);
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Admin dashboard={Dashboard} dataProvider={dataProvider}>
+      <Resource
+        name="users"
+        list={UserList}
+        edit={UserEdit}
+        create={UserCreate}
+        icon={UserIcon}
+      />
+      <Resource
+        name="posts"
+        list={PostList}
+        edit={PostEdit}
+        create={PostCreate}
+        icon={PostIcon}
+      />
+    </Admin>
   );
-}
+};
 
 export default App;
