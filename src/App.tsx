@@ -6,11 +6,14 @@ import { UserList, UserCreate, UserEdit } from "./app/components/users/Users";
 import { PostList, PostEdit, PostCreate } from "./app/components/posts/Posts";
 import PostIcon from "@material-ui/icons/Book";
 import UserIcon from "@material-ui/icons/Group";
+import {
+  LocationList,
+  LocationCreate,
+} from "./app/components/locations/Locations";
+import { BookList, BookCreate } from "./app/components/books/Books";
 // import simpleRestProvider from "ra-data-simple-rest";
 
-const dataProvider = jsonServerProvider(
-  "https://amit-json-server.herokuapp.com"
-);
+const dataProvider = jsonServerProvider("http://localhost:3500");
 const App = () => {
   return (
     <Admin dashboard={Dashboard} dataProvider={dataProvider}>
@@ -28,6 +31,13 @@ const App = () => {
         create={PostCreate}
         icon={PostIcon}
       />
+      <Resource
+        name="locations"
+        list={LocationList}
+        create={LocationCreate}
+        icon={PostIcon}
+      />
+      <Resource name="books" list={BookList} create={BookCreate} />
     </Admin>
   );
 };
